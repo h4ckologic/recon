@@ -35,9 +35,9 @@ def parse_entries(identity, results_list):
         stringified_entry   = str(trimmed_entry)       
 	try:
 		ipadrr = socket.gethostbyname(stringified_entry)
-        except : 
+        	results_list.append(stringified_entry+ " , " + str(ipadrr))
+	except : 
 		ipadrr = '0.0.0.0'
-	results_list.append(stringified_entry+ " , " + str(ipadrr))
 
 def format_entries(results, do_resolve_dns):
     """Sort and deduplicate hostnames and, if DNS resolution is turned on, resolve hostname"""
