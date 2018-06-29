@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
-# inf0junki3, 2016.
-# Perform recon on domains using certificate transparency.
+# created by inf0junki3, 2016.Modified By h4ckologic
 # *Prerequisites:* python3, feedparser, requests
 
 import dns.resolver
