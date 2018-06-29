@@ -11,6 +11,7 @@ import requests
 import sys
 import argparse
 
+
 base_url = "https://crt.sh/atom?q=%25.{}"
 
 def get_rss_for_domain(domain):
@@ -79,4 +80,6 @@ if __name__ == "__main__":
         for cur_entry in results_entries:
             parse_entries(cur_entry, results)
     final_results = format_entries(results, args.resolve_dns)
-    print("\n".join(final_results))
+    fo = open(domain+".txt", "w")
+    fo.write("\n".join(final_results))
+    fo.close()
