@@ -10,7 +10,8 @@ import logging
 import requests
 import sys
 import argparse
-
+import socket
+import re
 
 base_url = "https://crt.sh/atom?q=%25.{}"
 
@@ -32,8 +33,12 @@ def parse_entries(identity, results_list):
     entries     = entries_raw.split("\n")
     for entry in entries:
         trimmed_entry       = entry.strip()
-        stringified_entry   = str(trimmed_entry)
-        results_list.append(stringified_entry)
+        stringified_entry   = str(trimmed_entry)       
+	try:
+		ipadrr = socket.gethostbyname(stringified_entry)
+        except : 
+		ipadrr = '0.0.0.0'
+	results_list.append(stringified_entry+ " , " + str(ipadrr))
 
 def format_entries(results, do_resolve_dns):
     """Sort and deduplicate hostnames and, if DNS resolution is turned on, resolve hostname"""
@@ -81,5 +86,7 @@ if __name__ == "__main__":
             parse_entries(cur_entry, results)
     final_results = format_entries(results, args.resolve_dns)
     fo = open(domain+".txt", "w")
-    fo.write("\n".join(final_results))
+    fo.write("\n".join(final_results))    
     fo.close()
+    
+
